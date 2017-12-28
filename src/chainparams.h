@@ -60,7 +60,8 @@ public:
 
     const Consensus::Params& GetConsensus() const { return consensus; }
     const CMessageHeader::MessageStartChars& MessageStart() const { return pchMessageStart; }
-    int GetDefaultPort() const { return nDefaultPort; }
+    const CMessageHeader::MessageStartChars& MessageStartLegacy() const { return pchMessageStartLegacy; }
+    int GetDefaultPort(bool bootstrapping = false) const { return bootstrapping ? nLitecoinDefaultPort : nDefaultPort; }
 
     const CBlock& GenesisBlock() const { return genesis; }
     /** Default value for -checkmempool and -checkblockindex argument */
@@ -68,6 +69,8 @@ public:
     /** Policy: Filter transactions that do not match well-defined patterns */
     bool RequireStandard() const { return fRequireStandard; }
     uint64_t PruneAfterHeight() const { return nPruneAfterHeight; }
+    unsigned int EquihashN() const { return nEquihashN; }
+    unsigned int EquihashK() const { return nEquihashK; }
     /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
     /** Return the BIP70 network string (main, test or regtest) */
@@ -82,9 +85,13 @@ protected:
     CChainParams() {}
 
     Consensus::Params consensus;
+    CMessageHeader::MessageStartChars pchMessageStartLegacy;
     CMessageHeader::MessageStartChars pchMessageStart;
     int nDefaultPort;
+    int nLitecoinDefaultPort;
     uint64_t nPruneAfterHeight;
+    unsigned int nEquihashN = 0;
+    unsigned int nEquihashK = 0;
     std::vector<CDNSSeedData> vSeeds;
     std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
     std::string strNetworkID;
@@ -109,6 +116,12 @@ std::unique_ptr<CChainParams> CreateChainParams(const std::string& chain);
  * startup, except for unit tests.
  */
 const CChainParams &Params();
+
+/**
+ * Return the chain parameters with Bitcoin address format. This is used for
+ * address conversion.
+ */
+const CChainParams &BitcoinAddressFormatParams();
 
 /**
  * Sets the params returned by Params() to those for the given BIP70 chain name.

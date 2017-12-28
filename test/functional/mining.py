@@ -21,7 +21,7 @@ def b2x(b):
 def assert_template(node, block, expect, rehash=True):
     if rehash:
         block.hashMerkleRoot = block.calc_merkle_root()
-    rsp = node.getblocktemplate({'data': b2x(block.serialize()), 'mode': 'proposal'})
+    rsp = node.getblocktemplate({'data': b2x(block.serialize()), 'mode': 'proposal_legacy'})
     assert_equal(rsp, expect)
 
 class MiningTest(BitcoinTestFramework):
@@ -69,7 +69,7 @@ class MiningTest(BitcoinTestFramework):
         assert_raises_jsonrpc(-22, "Block does not start with a coinbase", node.submitblock, b2x(bad_block.serialize()))
 
         self.log.info("getblocktemplate: Test truncated final transaction")
-        assert_raises_jsonrpc(-22, "Block decode failed", node.getblocktemplate, {'data': b2x(block.serialize()[:-1]), 'mode': 'proposal'})
+        assert_raises_jsonrpc(-22, "Block decode failed", node.getblocktemplate, {'data': b2x(block.serialize()[:-1]), 'mode': 'proposal_legacy'})
 
         self.log.info("getblocktemplate: Test duplicate transaction")
         bad_block = copy.deepcopy(block)
@@ -96,7 +96,7 @@ class MiningTest(BitcoinTestFramework):
         bad_block_sn = bytearray(block.serialize())
         assert_equal(bad_block_sn[TX_COUNT_OFFSET], 1)
         bad_block_sn[TX_COUNT_OFFSET] += 1
-        assert_raises_jsonrpc(-22, "Block decode failed", node.getblocktemplate, {'data': b2x(bad_block_sn), 'mode': 'proposal'})
+        assert_raises_jsonrpc(-22, "Block decode failed", node.getblocktemplate, {'data': b2x(bad_block_sn), 'mode': 'proposal_legacy'})
 
         self.log.info("getblocktemplate: Test bad bits")
         bad_block = copy.deepcopy(block)
