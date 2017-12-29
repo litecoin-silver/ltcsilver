@@ -227,9 +227,9 @@ public:
         consensus.BIP34Hash = uint256S("8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573");
         consensus.BIP65Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.BIP66Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
-        consensus.LTSHeight = 1340482;
-        consensus.LitecoinPostforkBlock = uint256S("00000000ef93c2d9bac8da61ff11a699a5b815f77a194c567c5de0dbdf0bf28b");
-        consensus.LitecoinPostforkTime = 1508111338;
+        consensus.LTSHeight = 300000;
+        consensus.LitecoinPostforkBlock = uint256S("ad6562e3cfea440f3f8e0b0a2e909e45d65ad78d668bfdc12e810d1e0d64e468");
+        consensus.LitecoinPostforkTime = 1514162884;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = uint256S("0000000fffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitLegacy = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -266,14 +266,14 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0xad8ff6c2f5580d2b50bd881e11312425ea84fa99f322bf132beb722f97971bba"); //153490
 
-        pchMessageStartLegacy[0] = 0xfc;
-        pchMessageStartLegacy[1] = 0xc1;
-        pchMessageStartLegacy[2] = 0xb7;
-        pchMessageStartLegacy[3] = 0xdc;
+        pchMessageStartLegacy[0] = 0xfd;
+        pchMessageStartLegacy[1] = 0xd2;
+        pchMessageStartLegacy[2] = 0xc8;
+        pchMessageStartLegacy[3] = 0xf1;
 
-        pchMessageStart[0] = 0xfc;
-        pchMessageStart[1] = 0xc1;
-        pchMessageStart[2] = 0xb7;
+        pchMessageStart[0] = 0xfd;
+        pchMessageStart[1] = 0xd2;
+        pchMessageStart[2] = 0xc8;
         pchMessageStart[3] = 0xff;
         nDefaultPort = 19339;
         nLitecoinDefaultPort = 19335;
