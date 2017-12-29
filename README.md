@@ -5,7 +5,7 @@ Litecoin Silver Core integration/staging tree
 
 https://ltcsilver.org
 
-What is Litecoin?
+What is Litecoin Silver?
 ----------------
 
 Litecoin Silver is an experimental fork of Litecoin experimental digital currency that enables instant payments to
