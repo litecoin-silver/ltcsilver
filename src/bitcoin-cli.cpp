@@ -101,11 +101,11 @@ static int AppInitRPC(int argc, char* argv[])
         std::string strUsage = strprintf(_("%s RPC client version"), _(PACKAGE_NAME)) + " " + FormatFullVersion() + "\n";
         if (!gArgs.IsArgSet("-version")) {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  litecoin-cli [options] <command> [params]  " + strprintf(_("Send command to %s"), _(PACKAGE_NAME)) + "\n" +
-                  "  litecoin-cli [options] -named <command> [name=value] ... " + strprintf(_("Send command to %s (with named arguments)"), _(PACKAGE_NAME)) + "\n" +
-                  "  litecoin-cli [options] help                " + _("List commands") + "\n" +
-                  "  litecoin-cli [options] help <command>      " + _("Get help for a command") + "\n" +
-                  "  litecoin-cli [options] -convertaddress=address " + _("Convert Litecoin address to Litecoin Silver address")  + "\n";;
+                  "  ltcsilver-cli [options] <command> [params]  " + strprintf(_("Send command to %s"), _(PACKAGE_NAME)) + "\n" +
+                  "  ltcsilver-cli [options] -named <command> [name=value] ... " + strprintf(_("Send command to %s (with named arguments)"), _(PACKAGE_NAME)) + "\n" +
+                  "  ltcsilver-cli [options] help                " + _("List commands") + "\n" +
+                  "  ltcsilver-cli [options] help <command>      " + _("Get help for a command") + "\n" +
+                  "  ltcsilver-cli [options] -convertaddress=address " + _("Convert Litecoin address to Litecoin Silver address")  + "\n";;
 
             strUsage += "\n" + HelpMessageCli();
         }

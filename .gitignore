@@ -9,6 +9,14 @@ src/test/test_litecoin
 src/test/test_litecoin_fuzzy
 src/qt/test/test_litecoin-qt
 
+src/ltcsilver
+src/ltcsilverd
+src/ltcsilver-cli
+src/ltcsilver-tx
+src/test/test_ltcsilver
+src/test/test_ltcsilver_fuzzy
+src/qt/test/test_ltcsilver-qt
+
 # autoreconf
 Makefile.in
 aclocal.m4
@@ -76,10 +84,13 @@ src/qt/test/moc*.cpp
 Makefile
 litecoin-qt
 Litecoin-Qt.app
+ltcsilver-qt
+Ltcsilver-Qt.app
 
 # Unit-tests
 Makefile.test
 litecoin-qt_test
+ltcsilver-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -93,6 +104,7 @@ build
 *.gcda
 /*.info
 test_litecoin.coverage/
+test_ltcsilver.coverage/
 total.coverage/
 coverage_percent.txt
 
