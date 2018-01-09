@@ -1073,8 +1073,8 @@ bool IsInitialBlockDownload()
         return true;
     if (chainActive.Tip()->nChainWork < UintToArith256(chainParams.GetConsensus().nMinimumChainWork))
         return true;
-    //if (fSkipHardforkIBD && chainActive.Tip()->nHeight + 1 >= (int)chainParams.GetConsensus().LTSHeight)
-    //    return false;
+    if (chainActive.Tip()->nHeight + 1 >= (int)chainParams.GetConsensus().LTSHeight)
+        return false;
     int64_t target_time = fLTSBootstrapping ? (int64_t)chainParams.GetConsensus().LitecoinPostforkTime : GetTime();
     if (chainActive.Tip()->GetBlockTime() < (target_time - nMaxTipAge))
         return true;
