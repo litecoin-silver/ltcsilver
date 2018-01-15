@@ -230,8 +230,8 @@ public:
         consensus.LTSHeight = 300000;
         consensus.LitecoinPostforkBlock = uint256S("ad6562e3cfea440f3f8e0b0a2e909e45d65ad78d668bfdc12e810d1e0d64e468");
         consensus.LitecoinPostforkTime = 1514162884;
-        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.powLimitStart = uint256S("0000000fffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimitStart = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitLegacy = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
         //based on https://github.com/BTCGPU/BTCGPU/issues/78
