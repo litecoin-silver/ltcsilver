@@ -46,7 +46,6 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     arith_uint256 bnAvg {bnTot / params.nPowAveragingWindow};
 
-
     return CalculateNextWorkRequired(bnAvg, pindexLast->GetMedianTimePast(), pindexFirst->GetMedianTimePast(), params);
 }
 
@@ -78,7 +77,7 @@ unsigned int LitecoinGetNextWorkRequired(const CBlockIndex* pindexLast, const CB
     assert(pindexLast != nullptr);
     int nHeight = pindexLast->nHeight + 1;
     bool postfork = nHeight >= params.LTSHeight;
-    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimitLegacy).GetCompact();
 
     // Only change once per difficulty adjustment interval
     if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)
@@ -144,7 +143,6 @@ unsigned int LitecoinCalculateNextWorkRequired(const CBlockIndex* pindexLast, in
 
     return bnNew.GetCompact();
 }
-
 
 bool CheckEquihashSolution(const CBlockHeader *pblock, const CChainParams& params)
 {
