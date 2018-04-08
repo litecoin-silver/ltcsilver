@@ -31,7 +31,7 @@ enum
 /** Fork IDs **/
 enum
 {
-    FORKID_LTS = 79, // Atomic number AU
+    FORKID_LTS = 47, // Atomic number Ag
 };
 
 static const int FORKID_IN_USE = FORKID_LTS;
