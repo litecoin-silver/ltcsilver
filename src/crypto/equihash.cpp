@@ -17,12 +17,7 @@
 #endif
 
 #include "crypto/equihash.h"
-
-#ifndef NO_UTIL_LOG
 #include "util.h"
-#else
-#define LogPrint(...)
-#endif
 
 #include <algorithm>
 #include <iostream>
