@@ -19,7 +19,6 @@
 
 extern int nConnectTimeout;
 extern bool fNameLookup;
-extern bool fLTSBootstrapping;
 
 //! -timeout default
 static const int DEFAULT_CONNECT_TIMEOUT = 5000;
