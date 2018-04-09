@@ -97,6 +97,7 @@ static ScriptErrorDesc script_errors[]={
     {SCRIPT_ERR_WITNESS_MALLEATED_P2SH, "WITNESS_MALLEATED_P2SH"},
     {SCRIPT_ERR_WITNESS_UNEXPECTED, "WITNESS_UNEXPECTED"},
     {SCRIPT_ERR_WITNESS_PUBKEYTYPE, "WITNESS_PUBKEYTYPE"},
+    {SCRIPT_ERR_MUST_USE_FORKID, "MISSING_FORKID"},
 };
 
 const char *FormatScriptError(ScriptError_t err)
@@ -1207,7 +1208,7 @@ sign_multisig(CScript scriptPubKey, std::vector<CKey> keys, CTransaction transac
     {
         std::vector<unsigned char> vchSig;
         BOOST_CHECK(key.Sign(hash, vchSig));
-        vchSig.push_back((unsigned char)SIGHASH_ALL | SIGHASH_FORKID);
+        vchSig.push_back((unsigned char)(SIGHASH_ALL | SIGHASH_FORKID));
         result << vchSig;
     }
     return result;
