@@ -227,9 +227,9 @@ public:
         consensus.BIP34Hash = uint256S("8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573");
         consensus.BIP65Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.BIP66Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
-        consensus.LTSHeight = 300000;
-        consensus.LitecoinPostforkBlock = uint256S("ad6562e3cfea440f3f8e0b0a2e909e45d65ad78d668bfdc12e810d1e0d64e468");
-        consensus.LitecoinPostforkTime = 1514162884;
+        consensus.LTSHeight = 500000;
+        consensus.LitecoinPostforkBlock = uint256S("73dfc011f8daf59b6d53373534a88edb974d389185c2ffd252dd82db91d5c50b");
+        consensus.LitecoinPostforkTime = 1523518562;
         consensus.powLimit = 		uint256S("07ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = 	uint256S("007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitLegacy = 	uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
