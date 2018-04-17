@@ -93,3 +93,17 @@ std::string CBlock::ToString() const
     }
     return s.str();
 }
+
+
+std::string CBlockHeader::ToString() const
+{
+    std::stringstream s;
+    s << strprintf("CBlockHeader(hash=%s, pow_hash=%s, ver=0x%08x, hashPrevBlock=%s, hashMerkleRoot=%s, nHeight=%u, nTime=%u, nBits=%08x, nNonce=%s)\n",
+        GetHash().ToString(),
+        GetPoWHash().ToString(),
+        nVersion,
+        hashPrevBlock.ToString(),
+        hashMerkleRoot.ToString(),
+        nHeight, nTime, nBits, nNonce.GetHex());
+    return s.str();
+}

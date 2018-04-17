@@ -2316,6 +2316,8 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
 
         uint256 hashLastBlock;
         for (const CBlockHeader& header : headers) {
+			LogPrintf("hashLastBlock: %s", hashLastBlock.ToString());
+			LogPrintf("header: %s", header.ToString());
             if (!hashLastBlock.IsNull() && header.hashPrevBlock != hashLastBlock) {
                 Misbehaving(pfrom->GetId(), 20);
                 return error("non-continuous headers sequence");
@@ -2739,6 +2741,18 @@ bool ProcessMessages(CNode* pfrom, CConnman& connman, const std::atomic<bool>& i
 
     msg.SetVersion(pfrom->GetRecvVersion());
 
+	// This is a new peer. Before doing anything, we need to detect what magic
+	// the peer is using.
+	if (pfrom->nVersion == 0) {
+		if (memcmp(msg.hdr.pchMessageStart, chainparams.MessageStart(),
+				   CMessageHeader::MESSAGE_START_SIZE) == 0) {
+			pfrom->fUsesLTSMagic = true;
+		} else if (fLTSBootstrapping) {
+			// Allow to connect to Bitcoin clients when bootstrapping.
+			pfrom->fUsesLTSMagic = false;
+		}
+	}
+	
     // Scan for message start
     if (memcmp(msg.hdr.pchMessageStart, &pfrom->GetMagic(chainparams), CMessageHeader::MESSAGE_START_SIZE) != 0) {
         LogPrintf("PROCESSMESSAGE: INVALID MESSAGESTART %s peer=%d\n", SanitizeString(msg.hdr.GetCommand()), pfrom->GetId());
