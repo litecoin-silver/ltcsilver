@@ -131,9 +131,9 @@ static bool rest_headers(HTTPRequest* req,
     std::vector<std::string> path;
     boost::split(path, param, boost::is_any_of("/"));
 
-    if (path.size() != 2)
-        return RESTERR(req, HTTP_BAD_REQUEST, "No header count specified. Use /rest/headers/<count>/<hash>.<ext>.");
-
+    if (path.size() != 2 && (path.size() != 3 || path[0] != "legacy")) {
+        return RESTERR(req, HTTP_BAD_REQUEST, "No header count specified. Use /rest/headers/<count>/<hash>.<ext> or /rest/headers/legacy/<count>/<hash>.<ext>.");
+    }                           //use old rule if URI=/legacy/<COUNT>/<BLOCK-HASH>
     std::string headerCount,hashStr;
     bool legacy_format = false;
     if (path.size() == 2) {
@@ -145,12 +145,11 @@ static bool rest_headers(HTTPRequest* req,
         hashStr = path[2];
         legacy_format = true;
     }
-
-    long count = strtol(path[0].c_str(), nullptr, 10);
+    long count = strtol(headerCount.c_str(), nullptr, 10);
     if (count < 1 || count > 2000)
         return RESTERR(req, HTTP_BAD_REQUEST, "Header count out of range: " + path[0]);
 
-
+    
     uint256 hash;
     if (!ParseHashStr(hashStr, hash))
         return RESTERR(req, HTTP_BAD_REQUEST, "Invalid hash: " + hashStr);
@@ -219,7 +218,7 @@ static bool rest_block(HTTPRequest* req,
     std::vector<std::string> path;
     boost::split(path, param, boost::is_any_of("/"));
     bool legacy_format = false;
-    if (path.size() == 1) {
+    if (path.size() == 1) {          
         hashStr = path[0];
     }
     else {
