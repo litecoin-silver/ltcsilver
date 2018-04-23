@@ -1379,6 +1379,8 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     }
 
     fLTSBootstrapping = gArgs.GetBoolArg("-bootstrap", false);
+	fSkipHardforkIBD = gArgs.GetBoolArg("-skiphardforkibd", false);
+	
     // ********************************************************* Step 7: load block chain
 
     fReindex = gArgs.GetBoolArg("-reindex", false);
