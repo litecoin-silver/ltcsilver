@@ -278,7 +278,7 @@ public:
         nDefaultPort = 19339;
         nLitecoinDefaultPort = 19335;
         nPruneAfterHeight = 1000;
-        const size_t N = 200, K = 9;  // Same as mainchain.
+        const size_t N = 144, K = 5;  // Same as mainchain.
         BOOST_STATIC_ASSERT(equihash_parameters_acceptable(N, K));
         nEquihashN = N;
         nEquihashK = K;
