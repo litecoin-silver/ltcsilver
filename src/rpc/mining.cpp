@@ -414,6 +414,8 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
             "  \"curtime\" : ttt,                  (numeric) current timestamp in seconds since epoch (Jan 1 1970 GMT)\n"
             "  \"bits\" : \"xxxxxxxx\",              (string) compressed target of next block\n"
             "  \"height\" : n                      (numeric) The height of the next block\n"
+            "  \"equihashn\" : n                   (numeric) Equihash N\n"
+            "  \"equihashk\" : n                   (numeric) Equihash K\n"
             "}\n"
 
             "\nExamples:\n"
@@ -585,7 +587,8 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
         pindexPrev = pindexPrevNew;
     }
     CBlock* pblock = &pblocktemplate->block; // pointer for convenience
-    const Consensus::Params& consensusParams = Params().GetConsensus();
+    const CChainParams& params = Params();
+    const Consensus::Params& consensusParams = params.GetConsensus();
 
     // Update nTime
     UpdateTime(pblock, consensusParams, pindexPrev);
@@ -727,7 +730,10 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     }
     result.push_back(Pair("curtime", pblock->GetBlockTime()));
     result.push_back(Pair("bits", strprintf("%08x", pblock->nBits)));
-    result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight+1)));
+    int height = pindexPrev->nHeight + 1;
+    result.push_back(Pair("height", (int64_t)height));
+    result.push_back(Pair("equihashn", (int64_t)(params.EquihashN())));
+    result.push_back(Pair("equihashk", (int64_t)(params.EquihashK())));
 
     if (!pblocktemplate->vchCoinbaseCommitment.empty() && fSupportsSegwit) {
         result.push_back(Pair("default_witness_commitment", HexStr(pblocktemplate->vchCoinbaseCommitment.begin(), pblocktemplate->vchCoinbaseCommitment.end())));
@@ -759,7 +765,7 @@ UniValue submitblock(const JSONRPCRequest& request)
     // We allow 2 arguments for compliance with BIP22. Argument 2 is ignored.
     if (request.fHelp || request.params.size() < 1 || request.params.size() > 3) {
         throw std::runtime_error(
-            "submitblock \"hexdata\"  ( \"dummy\" )\n"
+            "submitblock \"hexdata\"  ( \"dummy\" \"legacy\" )\n"
             "\nAttempts to submit new block to network.\n"
             "See https://en.bitcoin.it/wiki/BIP_0022 for full specification.\n"
 
